@@ -11,21 +11,21 @@ import org.json.JSONObject;
  */
 public class GetCode {
 
-    public GetCode(String phone, final SuccessCallback successCallback, final FailCallback failCallback) {
+    public GetCode(String phone, final SuccessCallback successCallback, final FailCallback failCallback){
 
         new NetConnection(Config.SERVER_URL, HttpMethod.POST, new NetConnection.SuccessCallback() {
             @Override
             public void onSuccess(String result) {
                 try {
                     JSONObject jsonObj = new JSONObject(result);
-                    switch (jsonObj.getInt(Config.KEY_STATUS)) {
+                    switch (jsonObj.getInt(Config.KEY_STATUS)){
                         case Config.RESULT_STATUS_SUCCESS:
-                            if (null != successCallback) {
+                            if (null != successCallback){
                                 successCallback.onSuccess();
                             }
                             break;
                         case Config.RESULT_STATUS_FAIL:
-                            if (null != failCallback) {
+                            if (null != failCallback){
                                 failCallback.onFail();
                             }
                             break;
@@ -34,7 +34,7 @@ public class GetCode {
 
                 } catch (JSONException e) {
 
-                    if (null != failCallback) {
+                    if (null != failCallback){
                         failCallback.onFail();
                     }
                 }
@@ -42,18 +42,18 @@ public class GetCode {
         }, new NetConnection.FailCallback() {
             @Override
             public void onFail() {
-                if (null != failCallback) {
+                if (null != failCallback){
                     failCallback.onFail();
                 }
             }
-        }, Config.KEY_ACTION, Config.ACTION_GET_CODE, Config.KEY_PHONE_NUM, phone);
+        },Config.KEY_ACTION, Config.ACTION_GET_CODE, Config.KEY_PHONE_NUM, phone);
     }
 
-    public static interface SuccessCallback {
+    public static interface SuccessCallback{
         void onSuccess();
     }
 
-    public static interface FailCallback {
+    public static interface FailCallback{
         void onFail();
     }
 

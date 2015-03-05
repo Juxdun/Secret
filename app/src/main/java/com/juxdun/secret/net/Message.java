@@ -13,7 +13,7 @@ public class Message {
         this.phone_md5 = phone_md5;
     }
 
-    private String msgId = null, msg = null, phone_md5 = null;
+    private String msgId=null,msg=null,phone_md5=null;
 
     public String getMsgId() {
         return msgId;

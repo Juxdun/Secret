@@ -12,7 +12,6 @@ public class Comment {
     }
 
     private String content, phone_md5;
-
     public String getContent() {
         return content;
     }

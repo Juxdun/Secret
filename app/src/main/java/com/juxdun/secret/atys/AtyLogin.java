@@ -19,7 +19,7 @@ import com.juxdun.secret.tools.MD5Tool;
  * 登录Activity
  * Created by Juxdun on 2015/2/25.
  */
-public class AtyLogin extends Activity {
+public class AtyLogin extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class AtyLogin extends Activity {
             public void onClick(View v) {
 
                 // 如果号码为空，弹出提示
-                if (TextUtils.isEmpty(etPhone.getText())) {
+                if (TextUtils.isEmpty(etPhone.getText())){
                     Toast.makeText(AtyLogin.this, getResources().getString(R.string.phone_num_can_not_be_empty), Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -58,11 +58,11 @@ public class AtyLogin extends Activity {
             @Override
             public void onClick(View v) {
                 // 如果号码为空，弹出提示
-                if (TextUtils.isEmpty(etPhone.getText())) {
+                if (TextUtils.isEmpty(etPhone.getText())){
                     Toast.makeText(AtyLogin.this, getResources().getString(R.string.phone_num_can_not_be_empty), Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (TextUtils.isEmpty(etCode.getText())) {
+                if (TextUtils.isEmpty(etCode.getText())){
                     Toast.makeText(AtyLogin.this, getResources().getString(R.string.code_can_not_be_empty), Toast.LENGTH_LONG).show();
                 }
 
@@ -98,5 +98,5 @@ public class AtyLogin extends Activity {
         });
     }
 
-    private EditText etPhone, etCode;
+    private EditText etPhone,etCode;
 }

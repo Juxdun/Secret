@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * 负责获取联系人数据类
  * Created by Juxdun on 2015/2/25.
  */
 public class MyContacts {
@@ -19,19 +20,18 @@ public class MyContacts {
     /**
      * 取联系人数据，包装成JSON字符串数组
      * 格式参照文档
-     *
      * @param context
      * @return 联系人的JSON字符串
      */
-    public static String getContactsJSONString(Context context) {
-        Cursor cursor = context.getContentResolver().query(Phone.CONTENT_URI, null, null, null, null);
+    public static String getContactsJSONString(Context context){
+        Cursor cursor = context.getContentResolver().query(Phone.CONTENT_URI, null, null, null,null);
         JSONArray jsonArr = new JSONArray();
         JSONObject obj;
 
         String phoneNum;
-        while (cursor.moveToNext()) {
+        while (cursor.moveToNext()){
             phoneNum = cursor.getString(cursor.getColumnIndex(Phone.NUMBER));
-            if (phoneNum.startsWith("+86")) {
+            if (phoneNum.startsWith("+86")){
                 phoneNum = phoneNum.substring(3);
             }
             // 添加到json数组

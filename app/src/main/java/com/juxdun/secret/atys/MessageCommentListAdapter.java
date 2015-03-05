@@ -40,7 +40,7 @@ public class MessageCommentListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (null == convertView) {
+        if (null == convertView){
             convertView = LayoutInflater.from(context).inflate(R.layout.timeline_list_cell, null);
             // 通过setTag绑定一个ListCell，就不用每次findViewById耗费资源
             convertView.setTag(new ListCell((TextView) convertView.findViewById(R.id.tvCellLabel)));
@@ -56,12 +56,19 @@ public class MessageCommentListAdapter extends BaseAdapter {
     private List<Comment> comments = new ArrayList<Comment>();
     private Context context = null;
 
-    public void addAll(List<Comment> data) {
+    /**
+     * 添加列表数据到adapter
+     * @param data 列表数据
+     */
+    public void addAll(List<Comment> data){
         comments.addAll(data);
         notifyDataSetChanged();
     }
 
-    public void clear() {
+    /**
+     * 清空列表数据
+     */
+    public void clear(){
         comments.clear();
         notifyDataSetChanged();
     }
@@ -71,13 +78,12 @@ public class MessageCommentListAdapter extends BaseAdapter {
     }
 
     // 减少资源耗费
-    private static class ListCell {
-        public ListCell(TextView tvCellLabel) {
+    private static class ListCell{
+        public ListCell(TextView tvCellLabel){
             this.tvCellLabel = tvCellLabel;
         }
 
         private TextView tvCellLabel;
-
         public TextView getTvCellLabel() {
             return tvCellLabel;
         }

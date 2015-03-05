@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -70,6 +72,7 @@ public class AtyTimeline extends ListActivity {
             public void onSuccess(int page, int perpage, List<Message> timeline) {
                 pd.dismiss();
 
+                adapter.clear();
                 adapter.addAll(timeline);
             }
         }, new Timeline.FailCallback() {
@@ -80,7 +83,7 @@ public class AtyTimeline extends ListActivity {
                 if (errorCode == Config.RESULT_STATUS_INVALID_TOKEN) { // 如果是无效的token
                     startActivity(new Intent(AtyTimeline.this, AtyLogin.class));
                     finish();
-                } else { //如果是失败
+                }else { //如果是失败
                     Toast.makeText(AtyTimeline.this, R.string.fail_to_load_timeline_data, Toast.LENGTH_LONG).show();
                 }
             }
@@ -98,6 +101,37 @@ public class AtyTimeline extends ListActivity {
         i.putExtra(Config.KEY_PHONE_MD5, msg.getPhone_md5());
         i.putExtra(Config.KEY_TOKEN, token);
         startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_aty_timeline, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuShowAtyPublish:
+                Intent i = new Intent(this, AtyPublish.class);
+                i.putExtra(Config.KEY_PHONE_MD5, phone_md5);
+                i.putExtra(Config.KEY_TOKEN, token);
+                startActivityForResult(i, 0);
+
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case Config.ACTIVITY_RESULT_NEED_REFRESH:
+                loadMessage();
+                break;
+        }
     }
 
     private String phone_num, token, phone_md5;

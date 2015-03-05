@@ -16,17 +16,20 @@ public class MainActivity extends ActionBarActivity {
 
         String token = Config.getCachedToken(this);
         String phone_num = Config.getCachedPhoneNum(this);
-        if (null != token && null != phone_num) {
+        if (null!=token && null!=phone_num){
             Intent i = new Intent(this, AtyTimeline.class);
             i.putExtra(Config.KEY_TOKEN, token);
             i.putExtra(Config.KEY_PHONE_NUM, phone_num);
             startActivity(i);
-        } else {
+        }else {
             startActivity(new Intent(this, AtyLogin.class));
         }
 
         finish();
     }
+
+
+
 
 
 }
